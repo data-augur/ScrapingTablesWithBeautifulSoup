@@ -7,6 +7,8 @@ Created on Fri Oct 12 14:51:53 2018
 """
 
 import requests
+from bs4 import BeautifulSoup
+
 
 #Set Headers for request to the website 
 header = {
@@ -20,3 +22,10 @@ url = "https://www.ecp.gov.pk/ResultDetails.aspx?EleId=10070&Election=General%20
 #Fetch the page at the url using "requests" module
 page = requests.get(url, headers=header)
 
+#Create beautifulSoup object
+soup = BeautifulSoup(page.text, 'html.parser')
+
+#get the list of tables's html in the page.
+tables = soup.find_all('table')
+
+print(tables)
